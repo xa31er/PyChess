@@ -1,18 +1,18 @@
 import pygame
-
+from Game import *
 
 class board(object):
     def __init__(self):
         self.tmp = None
         self.board = [
-            ["r", "n", "b", "q", "k", "b", "n", "r"],
-            ["p", "p", "p", "p", "p", "p", "p", "p"],
             [" ", " ", " ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " ", " ", " "],
             [" ", " ", " ", " ", " ", " ", " ", " "],
-            ["P", "P", "P", "P", "P", "P", "P", "P"],
-            ["R", "N", "B", "Q", "K", "B", "N", "R"]
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "]
         ]
         self.WIDTH = self.HEIGHT = 512
         self.SIZE = (self.WIDTH, self.HEIGHT)
@@ -37,6 +37,18 @@ class board(object):
         self.capture_sound = pygame.mixer.Sound("Assets/capture.mp3")
         pygame.display.set_caption("PyChess")
         pygame.display.set_icon(self.W_KNIGHT_IMAGE)
+
+    def reset_board(self):
+        self.board = [
+            ["r", "n", "b", "q", "k", "b", "n", "r"],
+            ["p", "p", "p", "p", "p", "p", "p", "p"],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " "],
+            ["P", "P", "P", "P", "P", "P", "P", "P"],
+            ["R", "N", "B", "Q", "K", "B", "N", "R"]
+        ]
 
     def set(self, posx, posy, piece):
         self.board[posy][posx] = piece
@@ -85,9 +97,12 @@ class board(object):
         import math as mt
         return [mt.trunc(int(pygame.mouse.get_pos()[0]) / 64), mt.trunc(int(pygame.mouse.get_pos()[1]) / 64)]
 
-    def highlight(self):
-        pygame.draw.rect(self.screen, self.HIGH,
-                         (self.calc_mouse()[0] * 64, self.calc_mouse()[1] * 64, self.SQUARE_SIZE, self.SQUARE_SIZE), )
+    def highlights(self, highlights):
+        for pos in highlights:
+            self.highlight(pos)
+
+    def highlight(self, pos):
+        pygame.draw.rect(self.screen, self.HIGH, (pos[0] * 64, pos[1] * 64, self.SQUARE_SIZE, self.SQUARE_SIZE), )
 
     def draw_mouse_piece(self, piece):
         if piece == "P":
@@ -117,7 +132,7 @@ class board(object):
 
     def tick(self):
         self.draw_board()
-        self.highlight()
+        self.highlight(self.calc_mouse())
         self.draw_pieces()
         pygame.display.flip()
         if pygame.event.get(pygame.MOUSEBUTTONDOWN):
@@ -128,7 +143,7 @@ class board(object):
             holding = True
             while holding:
                 self.draw_board()
-                self.highlight()
+                self.highlight(self.calc_mouse())
                 self.draw_pieces()
                 self.draw_mouse_piece(piece)
                 pygame.display.flip()
@@ -137,12 +152,7 @@ class board(object):
                     mousey = self.calc_mouse()[1]
                     if self.board[mousey][mousex] == " ":
                         pygame.mixer.Sound.play(self.move_sound)
-                        print("empty")
                     else:
                         pygame.mixer.Sound.play(self.capture_sound)
-                        print("full")
                     self.set(mousex, mousey, piece)
                     holding = False
-
-    # def calc_moves(self, x, y, piece):
-    #   if piece == "p" and y = 2
