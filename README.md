@@ -8,7 +8,7 @@
   4. Enjoy!
 
 # Running the Engine (Windows)
-  1. Install pygame `python -m pip install -U pygame==2.5.1 --user`
+  1. Install pygame `pip install pygame`
   2. Download everything.
   3. Run Chess.py
   4. Enjoy!
