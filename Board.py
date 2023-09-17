@@ -21,18 +21,18 @@ class board(object):
         self.BLACK = (200, 170, 128)
         self.HIGH = (174, 240, 89)
         self.SQUARE_SIZE = self.WIDTH // 8
-        self.W_PAWN_IMAGE = pygame.image.load('Assets/Pawn.png')
-        self.W_ROOK_IMAGE = pygame.image.load('Assets/Rook.png')
-        self.W_KNIGHT_IMAGE = pygame.image.load('Assets/Knight.png')
-        self.W_BISHOP_IMAGE = pygame.image.load('Assets/Bishop.png')
-        self.W_QUEEN_IMAGE = pygame.image.load('Assets/Queen.png')
-        self.W_KING_IMAGE = pygame.image.load('Assets/King.png')
-        self.B_PAWN_IMAGE = pygame.image.load('Assets/pawn.png')
-        self.B_ROOK_IMAGE = pygame.image.load('Assets/rook.png')
-        self.B_KNIGHT_IMAGE = pygame.image.load('Assets/knight.png')
-        self.B_BISHOP_IMAGE = pygame.image.load('Assets/bishop.png')
-        self.B_QUEEN_IMAGE = pygame.image.load('Assets/queen.png')
-        self.B_KING_IMAGE = pygame.image.load('Assets/king.png')
+        self.W_PAWN_IMAGE = pygame.image.load('Assets/wp.png')
+        self.W_ROOK_IMAGE = pygame.image.load('Assets/wr.png')
+        self.W_KNIGHT_IMAGE = pygame.image.load('Assets/wkn.png')
+        self.W_BISHOP_IMAGE = pygame.image.load('Assets/wb.png')
+        self.W_QUEEN_IMAGE = pygame.image.load('Assets/wq.png')
+        self.W_KING_IMAGE = pygame.image.load('Assets/wk.png')
+        self.B_PAWN_IMAGE = pygame.image.load('Assets/bp.png')
+        self.B_ROOK_IMAGE = pygame.image.load('Assets/br.png')
+        self.B_KNIGHT_IMAGE = pygame.image.load('Assets/bkn.png')
+        self.B_BISHOP_IMAGE = pygame.image.load('Assets/bb.png')
+        self.B_QUEEN_IMAGE = pygame.image.load('Assets/bq.png')
+        self.B_KING_IMAGE = pygame.image.load('Assets/bk.png')
         self.move_sound = pygame.mixer.Sound("Assets/move-self.mp3")
         self.capture_sound = pygame.mixer.Sound("Assets/capture.mp3")
         pygame.display.set_caption("PyChess")
@@ -144,19 +144,5 @@ class board(object):
                     self.set(mousex, mousey, piece)
                     holding = False
 
-    """def calc_pieces(self):
-        print("TODO")
-        hi = pygame.sprite.Sprite()
-    def calc_piece(self,piece,pos,frst_mv = False):
-       if piece == "p" or "P":
-           if frst_mv:
-               
-       if piece == "r" or "R":
-
-       if piece == "n" or "N":
-
-       if piece == "b" or "B":
-
-       if piece == "q" or "Q":
-
-       if piece == "k" or "K": """
+    # def calc_moves(self, x, y, piece):
+    #   if piece == "p" and y = 2
