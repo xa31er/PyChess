@@ -2,7 +2,7 @@ from Board import *
 import pygame
 pygame.init()
 
-chess = board()
+chess = Board()
 
 
 def update_board():
