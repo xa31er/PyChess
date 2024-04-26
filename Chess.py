@@ -4,6 +4,7 @@ pygame.init()
 
 chess = Board()
 
+chess.reset_board()
 
 def update_board():
     chess.tick()

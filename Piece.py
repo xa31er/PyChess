@@ -33,9 +33,12 @@ class Piece(object):
     def draw_piece(self):
         self.screen.blit(self.images[self.type], (self.col * self.square_size, self.row * self.square_size))
 
-    def set_type(self, new_type):
+    def setType(self, new_type):
         self.type = new_type
         if new_type[0].upper() == new_type:
             self.isWhite = True
         else:
             self.isWhite = False
+
+    def getType(self):
+        return self.type[0]

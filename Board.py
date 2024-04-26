@@ -4,16 +4,6 @@ from Piece import *
 class Board(object):
     def __init__(self):
         self.tmp = None
-        self.start_pos = [
-            ["r", "n", "b", "q", "k", "b", "n", "r"],
-            ["p", "p", "p", "p", "p", "p", "p", "p"],
-            [" ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " "],
-            [" ", " ", " ", " ", " ", " ", " ", " "],
-            ["P", "P", "P", "P", "P", "P", "P", "P"],
-            ["R", "N", "B", "Q", "K", "B", "N", "R"]
-        ]
         self.WIDTH = self.HEIGHT = 512
         self.SIZE = (self.WIDTH, self.HEIGHT)
         self.screen = pg.display.set_mode(self.SIZE)
@@ -37,7 +27,21 @@ class Board(object):
         self.capture_sound = pg.mixer.Sound("Assets/capture.mp3")
         pg.display.set_caption("PyChess")
         pg.display.set_icon(self.W_KNIGHT_IMAGE)
-
+        self.start_pos = [
+            "r", "n", "b", "q", "k", "b", "n", "r",
+            "p", "p", "p", "p", "p", "p", "p", "p",
+            " ", " ", " ", " ", " ", " ", " ", " ",
+            " ", " ", " ", " ", " ", " ", " ", " ",
+            " ", " ", " ", " ", " ", " ", " ", " ",
+            " ", " ", " ", " ", " ", " ", " ", " ",
+            "P", "P", "P", "P", "P", "P", "P", "P",
+            "R", "N", "B", "Q", "K", "B", "N", "R"
+        ]
+        self.board = [
+        ]
+        for i in range(64):
+            self.board.append(Piece(self.screen,self.SQUARE_SIZE,""))
+    
     def set(self, posx, posy, piece):
         self.board[posy][posx] = piece
 
@@ -55,34 +59,34 @@ class Board(object):
         for row in range(8):
             for col in range(8):
                 piece = self.board[row][col]
-                if piece == "P":
+                if piece.getType() == "P":
                     self.screen.blit(self.W_PAWN_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "R":
+                elif piece.getType() == "R":
                     self.screen.blit(self.W_ROOK_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "N":
+                elif piece.getType() == "N":
                     self.screen.blit(self.W_KNIGHT_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "B":
+                elif piece.getType() == "B":
                     self.screen.blit(self.W_BISHOP_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "Q":
+                elif piece.getType() == "Q":
                     self.screen.blit(self.W_QUEEN_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "K":
+                elif piece.getType() == "K":
                     self.screen.blit(self.W_KING_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "p":
+                elif piece.getType() == "p":
                     self.screen.blit(self.B_PAWN_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "r":
+                elif piece.getType() == "r":
                     self.screen.blit(self.B_ROOK_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "n":
+                elif piece.getType() == "n":
                     self.screen.blit(self.B_KNIGHT_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "b":
+                elif piece.getType() == "b":
                     self.screen.blit(self.B_BISHOP_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "q":
+                elif piece.getType() == "q":
                     self.screen.blit(self.B_QUEEN_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
-                elif piece == "k":
+                elif piece.getType() == "k":
                     self.screen.blit(self.B_KING_IMAGE, (col * self.SQUARE_SIZE, row * self.SQUARE_SIZE))
 
     @staticmethod
     def calc_mouse():
-        import math as mt
+        import math as mt  
         return [mt.trunc(int(pg.mouse.get_pos()[0]) / 64), mt.trunc(int(pg.mouse.get_pos()[1]) / 64)]
 
     def highlight(self):
@@ -144,5 +148,11 @@ class Board(object):
                     self.set(mousex, mousey, piece)
                     holding = False
 
+    def reset_board(self):
+        i = 0
+        for piece in self.board:
+            piece.setType(self.start_pos[i])
+            i += 1
+    
     # def calc_moves(self, x, y, piece):
     #   if piece == "p" and y = 2
