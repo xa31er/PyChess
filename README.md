@@ -1,4 +1,4 @@
-# PyChess
+![Full Pychess Logo](https://github.com/xa31er/pychess/Assets/Logos/PyChess-logo-full.svg)
 > A python chess engine
 
 # Running the Engine (Linux)
