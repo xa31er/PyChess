@@ -19,18 +19,18 @@ class Piece(object):
 
         # Piece Sprites
         self.images = {
-            "P": pg.image.load('Assets/wp.png'),
-            "p": pg.image.load('Assets/bp.png'),
-            "R": pg.image.load('Assets/wr.png'),
-            "r": pg.image.load('Assets/br.png'),
-            "N": pg.image.load('Assets/wkn.png'),
-            "n": pg.image.load('Assets/bkn.png'),
-            "B": pg.image.load('Assets/wb.png'),
-            "b": pg.image.load('Assets/bb.png'),
-            "K": pg.image.load('Assets/wk.png'),
-            "k": pg.image.load('Assets/bk.png'),
-            "Q": pg.image.load('Assets/wq.png'),
-            "q": pg.image.load('Assets/bq.png')
+            "P": pg.image.load('Assets/wp.png').convert_alpha(),
+            "p": pg.image.load('Assets/bp.png').convert_alpha(),
+            "R": pg.image.load('Assets/wr.png').convert_alpha(),
+            "r": pg.image.load('Assets/br.png').convert_alpha(),
+            "N": pg.image.load('Assets/wn.png').convert_alpha(),
+            "n": pg.image.load('Assets/bn.png').convert_alpha(),
+            "B": pg.image.load('Assets/wb.png').convert_alpha(),
+            "b": pg.image.load('Assets/bb.png').convert_alpha(),
+            "K": pg.image.load('Assets/wk.png').convert_alpha(),
+            "k": pg.image.load('Assets/bk.png').convert_alpha(),
+            "Q": pg.image.load('Assets/wq.png').convert_alpha(),
+            "q": pg.image.load('Assets/bq.png').convert_alpha()
         }
 
         # Sounds
@@ -58,7 +58,7 @@ class Piece(object):
         return index
 
     def draw_piece(self):
-        self.screen.blit(self.images[self.type], (self.col * self.square_size, self.row * self.square_size))
+        return self.images[self.type]
 
     def set_type(self, new_type):
         self.type = new_type
